@@ -31,6 +31,10 @@ $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = "https://www.openquestions.wiki";
+$wgServer = getenv( 'WG_SERVER' );
+if ( empty( $wgServer ) ) {
+    throw new RuntimeException( 'WG_SERVER env variable not set.' );
+}
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
