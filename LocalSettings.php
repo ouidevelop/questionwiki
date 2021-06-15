@@ -230,3 +230,7 @@ $wgGroupPermissions['*']['createaccount'] = false;
 wfLoadExtension( 'UserMerge' );
 // By default nobody can use this function, enable for bureaucrat?
 $wgGroupPermissions['bureaucrat']['usermerge'] = true;
+
+// for debugging:
+error_reporting( -1 );
+ini_set( 'display_errors', 1 );
