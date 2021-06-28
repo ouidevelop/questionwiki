@@ -232,6 +232,9 @@ wfLoadExtension( 'UserMerge' );
 $wgGroupPermissions['bureaucrat']['usermerge'] = true;
 
 // for debugging:
-error_reporting( -1 );
-ini_set( 'display_errors', 1 );
-$wgShowSQLErrors = true;
+if ($wgSitename == 'qw-staging') {
+    error_reporting( -1 );
+    ini_set( 'display_errors', 1 );
+    $wgShowSQLErrors = true;
+    $wgShowDBErrorBacktrace = true;
+}
