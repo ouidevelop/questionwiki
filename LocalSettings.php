@@ -224,8 +224,8 @@ $wgSMTP = [
     'auth' => true
 ];
 
-
-$wgGroupPermissions['*']['createaccount'] = false;
+// comment this line out when you want people to be able to create accounts
+// $wgGroupPermissions['*']['createaccount'] = false;
 
 wfLoadExtension( 'UserMerge' );
 // By default nobody can use this function, enable for bureaucrat?
