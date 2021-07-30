@@ -197,6 +197,7 @@ wfLoadExtension( 'TextExtracts' );
 wfLoadExtension( 'TitleBlacklist' );
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'WikiEditor' );
+wfLoadExtension( 'Nuke' );
 
 
 # End of automatically generated settings.
@@ -226,6 +227,7 @@ $wgSMTP = [
 
 // comment this line out when you want people to be able to create accounts
 $wgGroupPermissions['*']['createaccount'] = false;
+$wgReadOnly = 'this wiki is in read only while I figure out spam problems';
 // restrict editing
 $wgGroupPermissions['user']['edit'] = false;
 $wgGroupPermissions['*']['createpage'] = false;
