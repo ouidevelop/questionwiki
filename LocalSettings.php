@@ -57,6 +57,18 @@ $wgEnableUserEmail = true; # UPO
 
 $wgEmergencyContact = "mike@openquestions.wiki";
 $wgPasswordSender = "mike@openquestions.wiki";
+$emailPassword = getenv( 'EMAIL_PASSWORD' );
+if ( empty( $emailPassword ) ) {
+    throw new RuntimeException( 'EMAIL_PASSWORD env variable not set.' );
+}
+$wgSMTP = [
+    'host' => 'ssl://smtp.gmail.com', // hostname of the email server
+    'IDHost' => 'gmail.com',
+    'port' => 465,
+    'username' => 'mike@openquestions.wiki', // user of the email account
+    'password' => $emailPassword, // app password of the email account
+    'auth' => true
+];
 
 $wgEnotifUserTalk = true; # UPO
 $wgEnotifWatchlist = true; # UPO
@@ -163,6 +175,8 @@ $wgVectorDefaultSkinVersion = '2';
 
 # Enabled skins.
 # The following skins were automatically enabled:
+wfLoadSkin( 'MonoBook' );
+wfLoadSkin( 'Timeless' );
 wfLoadSkin( 'Vector' );
 
 
@@ -175,16 +189,17 @@ wfLoadExtension( 'Cite' );
 wfLoadExtension( 'CiteThisPage' );
 wfLoadExtension( 'CodeEditor' );
 wfLoadExtension( 'ConfirmEdit' );
+wfLoadExtension( 'Echo' );
+wfLoadExtension( 'Flow' );
 wfLoadExtension( 'Gadgets' );
 wfLoadExtension( 'ImageMap' );
 wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'Interwiki' );
 wfLoadExtension( 'LocalisationUpdate' );
 wfLoadExtension( 'MultimediaViewer' );
+wfLoadExtension( 'Nuke' );
 wfLoadExtension( 'OATHAuth' );
-wfLoadExtension( 'PageImages' );
 wfLoadExtension( 'ParserFunctions' );
-wfLoadExtension( 'PdfHandler' );
 wfLoadExtension( 'Poem' );
 wfLoadExtension( 'Renameuser' );
 wfLoadExtension( 'ReplaceText' );
@@ -195,35 +210,20 @@ wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 wfLoadExtension( 'TemplateData' );
 wfLoadExtension( 'TextExtracts' );
 wfLoadExtension( 'TitleBlacklist' );
+wfLoadExtension( 'UserMerge' );
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'WikiEditor' );
-wfLoadExtension( 'Nuke' );
+
 
 
 # End of automatically generated settings.
 # Add more configuration options below.
 
-wfLoadExtension( 'Flow' );
+# todo: why do we have these settings for flow? what do they do?
 $wgNamespaceContentModels[NS_TALK] = 'flow-board';
 $wgNamespaceContentModels[NS_USER_TALK] = 'flow-board';
-wfLoadExtension( 'Echo' );
+
 $wgShowExceptionDetails = true;
-
-
-$emailPassword = getenv( 'EMAIL_PASSWORD' );
-
-if ( empty( $emailPassword ) ) {
-    throw new RuntimeException( 'EMAIL_PASSWORD env variable not set.' );
-}
-
-$wgSMTP = [
-    'host' => 'ssl://smtp.gmail.com', // hostname of the email server
-    'IDHost' => 'gmail.com',
-    'port' => 465,
-    'username' => 'mike@openquestions.wiki', // user of the email account
-    'password' => $emailPassword, // app password of the email account
-    'auth' => true
-];
 
 // comment this line out when you want people to be able to create accounts
 $wgGroupPermissions['*']['createaccount'] = false;
