@@ -225,9 +225,6 @@ $wgNamespaceContentModels[NS_USER_TALK] = 'flow-board';
 
 $wgShowExceptionDetails = true;
 
-// comment this line out when you want people to be able to create accounts
-$wgGroupPermissions['*']['createaccount'] = false;
-$wgReadOnly = 'this wiki is in read only while I figure out spam problems';
 // restrict editing
 $wgGroupPermissions['user']['edit'] = false;
 $wgGroupPermissions['*']['createpage'] = false;
