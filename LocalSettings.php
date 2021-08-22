@@ -233,11 +233,11 @@ $wgGroupPermissions['*']['createpage'] = false;
 $wgGroupPermissions['bureaucrat']['usermerge'] = true;
 
 // for debugging:
-if ($wgSitename == 'qw-staging') {
-    error_reporting( -1 );
-    ini_set( 'display_errors', 1 );
-    $wgShowSQLErrors = true;
-    $wgShowDBErrorBacktrace = true;
-    $wgDebugLogFile = debug.txt;
-    $wgDebugDumpSql = true;
-}
+// if ($wgSitename == 'qw-staging') {
+error_reporting( -1 );
+ini_set( 'display_errors', 1 );
+$wgShowSQLErrors = true;
+$wgShowDBErrorBacktrace = true;
+$wgDebugLogFile = '/app/debug.log';
+$wgDebugDumpSql = true;
+// }
