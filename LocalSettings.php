@@ -229,7 +229,6 @@ $wgShowExceptionDetails = true;
 $wgGroupPermissions['user']['edit'] = false;
 $wgGroupPermissions['*']['createpage'] = false;
 
-wfLoadExtension( 'UserMerge' );
 // By default nobody can use this function, enable for bureaucrat?
 $wgGroupPermissions['bureaucrat']['usermerge'] = true;
 
@@ -239,4 +238,6 @@ if ($wgSitename == 'qw-staging') {
     ini_set( 'display_errors', 1 );
     $wgShowSQLErrors = true;
     $wgShowDBErrorBacktrace = true;
+    $wgDebugLogFile = debug.txt;
+    $wgDebugDumpSql = true;
 }
