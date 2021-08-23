@@ -243,3 +243,5 @@ if ($wgSitename == 'qw-staging') {
     $wgShowSQLErrors = true;
     $wgShowDBErrorBacktrace = true;
 }
+
+$wgDebugToolbar = true;
