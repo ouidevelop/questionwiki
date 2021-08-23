@@ -241,3 +241,5 @@ $wgShowDBErrorBacktrace = true;
 $wgDebugLogFile = '/app/debug.log';
 $wgDebugDumpSql = true;
 // }
+
+$wgDebugToolbar = true;
