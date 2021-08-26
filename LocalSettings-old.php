@@ -243,3 +243,5 @@ $wgDebugDumpSql = true;
 // }
 
 $wgDebugToolbar = true;
+
+// $wgCacheDirectory = "/tmp";
