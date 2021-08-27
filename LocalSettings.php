@@ -246,3 +246,4 @@ $wgDebugToolbar = true;
 
 $wgCacheDirectory = "/tmp";
 $wgGroupPermissions['trustworthy'] = $wgGroupPermissions['autoconfirmed'];
+$wgEmailConfirmToEdit = true;
