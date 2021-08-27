@@ -247,3 +247,4 @@ $wgDebugToolbar = true;
 $wgCacheDirectory = "/tmp";
 $wgGroupPermissions['trustworthy'] = $wgGroupPermissions['autoconfirmed'];
 $wgEmailConfirmToEdit = true;
+$wgMainCacheType = CACHE_ACCEL;
