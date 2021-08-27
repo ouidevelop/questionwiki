@@ -249,4 +249,4 @@ $wgGroupPermissions['trustworthy'] = $wgGroupPermissions['autoconfirmed'];
 $wgEmailConfirmToEdit = true;
 $wgMainCacheType = CACHE_ACCEL;
 wfLoadExtension( 'StopForumSpam' );
-$wgSFSIPListLocation = 'listed_ip_30.txt';
+$wgSFSIPListLocation = '/app/listed_ip_30.txt';
