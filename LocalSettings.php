@@ -250,3 +250,5 @@ $wgEmailConfirmToEdit = true;
 $wgMainCacheType = CACHE_ACCEL;
 wfLoadExtension( 'StopForumSpam' );
 $wgSFSIPListLocation = 'listed_ip_30.txt';
+
+shell_exec('echo "bob" > carlcarl && cat carlcarl');
