@@ -245,3 +245,4 @@ $wgDebugDumpSql = true;
 $wgDebugToolbar = true;
 
 $wgCacheDirectory = "/tmp";
+$wgGroupPermissions['trustworthy'] = $wgGroupPermissions['autoconfirmed'];
