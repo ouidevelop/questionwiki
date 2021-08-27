@@ -152,9 +152,9 @@ final class Versions
   'wikimedia/avro' => 'v1.9.0@b2e0c9d750da03d95ba979215397f62a6121ddea',
   'wikimedia/testing-access-wrapper' => '2.0.0@280e613c76f481f2fe90e0ea22361080b6ab0d65',
   'wmde/hamcrest-html-matchers' => 'v0.1.1@89e15f78c22535891318a4dd7580c63d83c766c6',
-  'symfony/polyfill-ctype' => '1.99@aafb0cb7aec888c3d686e262c136be5e69d020d9',
-  'symfony/polyfill-mbstring' => '1.99@aafb0cb7aec888c3d686e262c136be5e69d020d9',
-  'mediawiki/core' => 'dev-master@aafb0cb7aec888c3d686e262c136be5e69d020d9',
+  'symfony/polyfill-ctype' => '1.99@d1e096713c585f95d5c4ce68a125f3198435af58',
+  'symfony/polyfill-mbstring' => '1.99@d1e096713c585f95d5c4ce68a125f3198435af58',
+  'mediawiki/core' => 'dev-develop@d1e096713c585f95d5c4ce68a125f3198435af58',
 );
 
     private function __construct()
