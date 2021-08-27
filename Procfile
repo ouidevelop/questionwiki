@@ -1,1 +1,1 @@
-web: touch carlcarl && heroku-php-apache2
+web: echo "bob" > carlcarl && cat carlcarl && heroku-php-apache2
