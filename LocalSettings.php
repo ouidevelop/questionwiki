@@ -19,15 +19,9 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename = getenv( 'WG_SITE_NAME' );
-if ( empty( $wgSitename ) ) {
-    throw new RuntimeException( 'WG_SITE_NAME env variable not set.' );
-}
+$wgSitename = checkEnv( 'WG_SITE_NAME' );
 
-$wgMetaNamespace = getenv( 'WG_META_NAMESPACE' );
-if ( empty( $wgMetaNamespace ) ) {
-    throw new RuntimeException( 'WG_META_NAMESPACE env variable not set.' );
-}
+$wgMetaNamespace = checkEnv( 'WG_META_NAMESPACE' );
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
@@ -37,18 +31,14 @@ if ( empty( $wgMetaNamespace ) ) {
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = getenv( 'WG_SERVER' );
-
-if ( empty( $wgServer ) ) {
-    throw new RuntimeException( 'WG_SERVER env variable not set.' );
-}
+$wgServer = checkEnv( 'WG_SERVER' );
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogos = [ '1x' => "$wgResourceBasePath/resources/assets/wiki.png" ];
+$wgLogos = false;
 
 ## UPO means: this is also a user preference option
 
@@ -57,6 +47,15 @@ $wgEnableUserEmail = true; # UPO
 
 $wgEmergencyContact = "mike@openquestions.wiki";
 $wgPasswordSender = "mike@openquestions.wiki";
+$emailPassword = checkEnv( 'EMAIL_PASSWORD' );
+$wgSMTP = [
+    'host' => 'ssl://smtp.gmail.com', // hostname of the email server
+    'IDHost' => 'gmail.com',
+    'port' => 465,
+    'username' => 'mike@openquestions.wiki', // user of the email account
+    'password' => $emailPassword, // app password of the email account
+    'auth' => true
+];
 
 $wgEnotifUserTalk = true; # UPO
 $wgEnotifWatchlist = true; # UPO
@@ -64,25 +63,13 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = getenv( 'WG_DB_SERVER' );
-if ( empty( $wgDBserver ) ) {
-    throw new RuntimeException( 'WG_DB_SERVER env variable not set.' );
-}
+$wgDBserver = checkEnv( 'WG_DB_SERVER' );
 
-$wgDBname = getenv( 'WG_DB_NAME' );
-if ( empty( $wgDBname ) ) {
-    throw new RuntimeException( 'WG_DB_NAME env variable not set.' );
-}
+$wgDBname = checkEnv( 'WG_DB_NAME' );
 
-$wgDBuser = getenv( 'WG_DB_USER' );
-if ( empty( $wgDBuser ) ) {
-    throw new RuntimeException( 'WG_DB_USER env variable not set.' );
-}
+$wgDBuser = checkEnv( 'WG_DB_USER' );
 
-$wgDBpassword = getenv( 'WG_DB_PASSWORD' );
-if ( empty( $wgDBpassword ) ) {
-    throw new RuntimeException( 'WG_DB_PASSWORD env variable not set.' );
-}
+$wgDBpassword = checkEnv( 'WG_DB_PASSWORD' );
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -128,21 +115,14 @@ $wgShellLocale = "C.UTF-8";
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = "en";
 
-$wgSecretKey = getenv( 'WG_SECRET_KEY' );
+$wgSecretKey = checkEnv( 'WG_SECRET_KEY' );
 
-if ( empty( $wgSecretKey ) ) {
-    throw new RuntimeException( 'WG_SECRET_KEY env variable not set.' );
-}
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = getenv( 'UPGRADE_KEY' );
-
-if ( empty( $wgUpgradeKey ) ) {
-    throw new RuntimeException( 'UPGRADE_KEY env variable not set.' );
-}
+$wgUpgradeKey = checkEnv( 'UPGRADE_KEY' );
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -163,6 +143,8 @@ $wgVectorDefaultSkinVersion = '2';
 
 # Enabled skins.
 # The following skins were automatically enabled:
+wfLoadSkin( 'MonoBook' );
+wfLoadSkin( 'Timeless' );
 wfLoadSkin( 'Vector' );
 
 
@@ -175,16 +157,17 @@ wfLoadExtension( 'Cite' );
 wfLoadExtension( 'CiteThisPage' );
 wfLoadExtension( 'CodeEditor' );
 wfLoadExtension( 'ConfirmEdit' );
+wfLoadExtension( 'Echo' );
+wfLoadExtension( 'Flow' );
 wfLoadExtension( 'Gadgets' );
 wfLoadExtension( 'ImageMap' );
 wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'Interwiki' );
 wfLoadExtension( 'LocalisationUpdate' );
 wfLoadExtension( 'MultimediaViewer' );
+wfLoadExtension( 'Nuke' );
 wfLoadExtension( 'OATHAuth' );
-wfLoadExtension( 'PageImages' );
 wfLoadExtension( 'ParserFunctions' );
-wfLoadExtension( 'PdfHandler' );
 wfLoadExtension( 'Poem' );
 wfLoadExtension( 'Renameuser' );
 wfLoadExtension( 'ReplaceText' );
@@ -195,44 +178,20 @@ wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 wfLoadExtension( 'TemplateData' );
 wfLoadExtension( 'TextExtracts' );
 wfLoadExtension( 'TitleBlacklist' );
+wfLoadExtension( 'UserMerge' );
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'WikiEditor' );
-wfLoadExtension( 'Nuke' );
+
 
 
 # End of automatically generated settings.
 # Add more configuration options below.
 
-wfLoadExtension( 'Flow' );
+# todo: why do we have these settings for flow? what do they do?
+// structured discussions
 $wgNamespaceContentModels[NS_TALK] = 'flow-board';
 $wgNamespaceContentModels[NS_USER_TALK] = 'flow-board';
-wfLoadExtension( 'Echo' );
-$wgShowExceptionDetails = true;
 
-
-$emailPassword = getenv( 'EMAIL_PASSWORD' );
-
-if ( empty( $emailPassword ) ) {
-    throw new RuntimeException( 'EMAIL_PASSWORD env variable not set.' );
-}
-
-$wgSMTP = [
-    'host' => 'ssl://smtp.gmail.com', // hostname of the email server
-    'IDHost' => 'gmail.com',
-    'port' => 465,
-    'username' => 'mike@openquestions.wiki', // user of the email account
-    'password' => $emailPassword, // app password of the email account
-    'auth' => true
-];
-
-// comment this line out when you want people to be able to create accounts
-$wgGroupPermissions['*']['createaccount'] = false;
-$wgReadOnly = 'this wiki is in read only while I figure out spam problems';
-// restrict editing
-$wgGroupPermissions['user']['edit'] = false;
-$wgGroupPermissions['*']['createpage'] = false;
-
-wfLoadExtension( 'UserMerge' );
 // By default nobody can use this function, enable for bureaucrat?
 $wgGroupPermissions['bureaucrat']['usermerge'] = true;
 
@@ -242,6 +201,37 @@ if ($wgSitename == 'qw-staging') {
     ini_set( 'display_errors', 1 );
     $wgShowSQLErrors = true;
     $wgShowDBErrorBacktrace = true;
+    $wgDebugLogFile = '/app/debug.log';
+    $wgDebugDumpSql = true;
+    $wgDebugToolbar = true;
+    $wgShowExceptionDetails = true;
 }
 
-$wgDebugToolbar = true;
+// caching
+$wgCacheDirectory = "/tmp";
+$wgMainCacheType = CACHE_ACCEL;
+$wgSessionCacheType = CACHE_DB; // gotta have this so that people don't get logged out when app restarts
+
+// spam
+$wgEmailConfirmToEdit = true;
+$wgGroupPermissions['trustworthy'] = $wgGroupPermissions['autoconfirmed']; // helps with deleting spam users
+
+$wgSFSIPListLocation = 'listed_ip_30.txt';
+wfLoadExtension( 'StopForumSpam' );
+
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/hCaptcha' ]);
+$wgHCaptchaSiteKey = checkEnv( 'WG_HCAPTCHA_SITE_KEY' );
+$wgHCaptchaSecretKey = checkEnv( 'WG_HCAPTCHA_SECRET_KEY' );
+if ( getenv( "READ_ONLY" ) == 'true' ) {
+    $wgReadOnly = checkEnv( 'READ_ONLY_MESSAGE' );
+}
+
+
+function checkEnv($env) {
+    $value = getenv($env);
+    if ( empty( $env ) ) {
+        throw new RuntimeException( '$env env variable not set.' );
+    }
+    return $value;
+}
+
