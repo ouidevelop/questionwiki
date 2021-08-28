@@ -19,15 +19,9 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename = getenv( 'WG_SITE_NAME' );
-if ( empty( $wgSitename ) ) {
-    throw new RuntimeException( 'WG_SITE_NAME env variable not set.' );
-}
+$wgSitename = checkEnv( 'WG_SITE_NAME' );
 
-$wgMetaNamespace = getenv( 'WG_META_NAMESPACE' );
-if ( empty( $wgMetaNamespace ) ) {
-    throw new RuntimeException( 'WG_META_NAMESPACE env variable not set.' );
-}
+$wgMetaNamespace = checkEnv( 'WG_META_NAMESPACE' );
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
@@ -37,7 +31,7 @@ if ( empty( $wgMetaNamespace ) ) {
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = getenv( 'WG_SERVER' );
+$wgServer = checkEnv( 'WG_SERVER' );
 
 if ( empty( $wgServer ) ) {
     throw new RuntimeException( 'WG_SERVER env variable not set.' );
@@ -57,7 +51,7 @@ $wgEnableUserEmail = true; # UPO
 
 $wgEmergencyContact = "mike@openquestions.wiki";
 $wgPasswordSender = "mike@openquestions.wiki";
-$emailPassword = getenv( 'EMAIL_PASSWORD' );
+$emailPassword = checkEnv( 'EMAIL_PASSWORD' );
 if ( empty( $emailPassword ) ) {
     throw new RuntimeException( 'EMAIL_PASSWORD env variable not set.' );
 }
@@ -76,25 +70,13 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = getenv( 'WG_DB_SERVER' );
-if ( empty( $wgDBserver ) ) {
-    throw new RuntimeException( 'WG_DB_SERVER env variable not set.' );
-}
+$wgDBserver = checkEnv( 'WG_DB_SERVER' );
 
-$wgDBname = getenv( 'WG_DB_NAME' );
-if ( empty( $wgDBname ) ) {
-    throw new RuntimeException( 'WG_DB_NAME env variable not set.' );
-}
+$wgDBname = checkEnv( 'WG_DB_NAME' );
 
-$wgDBuser = getenv( 'WG_DB_USER' );
-if ( empty( $wgDBuser ) ) {
-    throw new RuntimeException( 'WG_DB_USER env variable not set.' );
-}
+$wgDBuser = checkEnv( 'WG_DB_USER' );
 
-$wgDBpassword = getenv( 'WG_DB_PASSWORD' );
-if ( empty( $wgDBpassword ) ) {
-    throw new RuntimeException( 'WG_DB_PASSWORD env variable not set.' );
-}
+$wgDBpassword = checkEnv( 'WG_DB_PASSWORD' );
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -140,21 +122,14 @@ $wgShellLocale = "C.UTF-8";
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = "en";
 
-$wgSecretKey = getenv( 'WG_SECRET_KEY' );
+$wgSecretKey = checkEnv( 'WG_SECRET_KEY' );
 
-if ( empty( $wgSecretKey ) ) {
-    throw new RuntimeException( 'WG_SECRET_KEY env variable not set.' );
-}
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = getenv( 'UPGRADE_KEY' );
-
-if ( empty( $wgUpgradeKey ) ) {
-    throw new RuntimeException( 'UPGRADE_KEY env variable not set.' );
-}
+$wgUpgradeKey = checkEnv( 'UPGRADE_KEY' );
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -253,13 +228,15 @@ $wgSFSIPListLocation = 'listed_ip_30.txt';
 
 
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/hCaptcha' ]);
-$wgHCaptchaSiteKey = getenv( 'WG_HCAPTCHA_SITE_KEY' );
-if ( empty( $wgHCaptchaSiteKey ) ) {
-    throw new RuntimeException( 'WG_HCAPTCHA_SITE_KEY env variable not set.' );
-}
-$wgHCaptchaSecretKey = getenv( 'WG_HCAPTCHA_SECRET_KEY' );
-if ( empty( $wgHCaptchaSecretKey ) ) {
-    throw new RuntimeException( 'WG_HCAPTCHA_SECRET_KEY env variable not set.' );
-}
+$wgHCaptchaSiteKey = checkEnv( 'WG_HCAPTCHA_SITE_KEY' );
+$wgHCaptchaSecretKey = checkEnv( 'WG_HCAPTCHA_SECRET_KEY' );
 
 $wgSessionCacheType = CACHE_DB;
+
+function checkEnv($env) {
+    $value = getenv($env);
+    if ( empty( $env ) ) {
+        throw new RuntimeException( '$env env variable not set.' );
+    }
+    return value;
+}
