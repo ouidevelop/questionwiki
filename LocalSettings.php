@@ -229,6 +229,9 @@ wfLoadExtension( 'StopForumSpam' );
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/hCaptcha' ]);
 $wgHCaptchaSiteKey = checkEnv( 'WG_HCAPTCHA_SITE_KEY' );
 $wgHCaptchaSecretKey = checkEnv( 'WG_HCAPTCHA_SECRET_KEY' );
+if ( getenv( "READ_ONLY" ) == 'true' ) {
+    $wgReadOnly = checkEnv( 'READ_ONLY_MESSAGE' )
+}
 
 
 function checkEnv($env) {
