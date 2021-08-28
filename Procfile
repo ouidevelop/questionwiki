@@ -1,1 +1,1 @@
-web: pwd && heroku-php-apache2
+web: curl -sS https://www.stopforumspam.com/downloads/listed_ip_30.zip > ips.zip && unzip -o ips.zip && heroku-php-apache2
