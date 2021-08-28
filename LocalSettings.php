@@ -42,7 +42,7 @@ $wgResourceBasePath = $wgScriptPath;
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = ""; //makes log go away, since we don't have one
+$wgLogos = false;
 
 ## UPO means: this is also a user preference option
 
