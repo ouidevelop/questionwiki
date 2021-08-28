@@ -33,10 +33,6 @@ $wgScriptPath = "";
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = checkEnv( 'WG_SERVER' );
 
-if ( empty( $wgServer ) ) {
-    throw new RuntimeException( 'WG_SERVER env variable not set.' );
-}
-
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
 
@@ -52,9 +48,6 @@ $wgEnableUserEmail = true; # UPO
 $wgEmergencyContact = "mike@openquestions.wiki";
 $wgPasswordSender = "mike@openquestions.wiki";
 $emailPassword = checkEnv( 'EMAIL_PASSWORD' );
-if ( empty( $emailPassword ) ) {
-    throw new RuntimeException( 'EMAIL_PASSWORD env variable not set.' );
-}
 $wgSMTP = [
     'host' => 'ssl://smtp.gmail.com', // hostname of the email server
     'IDHost' => 'gmail.com',
