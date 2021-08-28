@@ -250,3 +250,14 @@ $wgEmailConfirmToEdit = true;
 $wgMainCacheType = CACHE_ACCEL;
 wfLoadExtension( 'StopForumSpam' );
 $wgSFSIPListLocation = 'listed_ip_30.txt';
+
+
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/hCaptcha' ]);
+$wgHCaptchaSiteKey = getenv( 'WG_HCAPTCHA_SITE_KEY' );
+if ( empty( $wgHCaptchaSiteKey ) ) {
+    throw new RuntimeException( 'WG_HCAPTCHA_SITE_KEY env variable not set.' );
+}
+$wgHCaptchaSecretKey = getenv( 'WG_HCAPTCHA_SECRET_KEY' );
+if ( empty( $wgHCaptchaSecretKey ) ) {
+    throw new RuntimeException( 'WG_HCAPTCHA_SECRET_KEY env variable not set.' );
+}
