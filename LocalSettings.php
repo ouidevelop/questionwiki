@@ -238,5 +238,5 @@ function checkEnv($env) {
     if ( empty( $env ) ) {
         throw new RuntimeException( '$env env variable not set.' );
     }
-    return value;
+    return $value;
 }
