@@ -42,7 +42,7 @@ $wgResourceBasePath = $wgScriptPath;
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-// $wgLogos = [ '1x' => "$wgResourceBasePath/resources/assets/wiki.png" ];
+$wgLogo = ""; //makes log go away, since we don't have one
 
 ## UPO means: this is also a user preference option
 
@@ -230,7 +230,7 @@ wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/hCaptcha' ]);
 $wgHCaptchaSiteKey = checkEnv( 'WG_HCAPTCHA_SITE_KEY' );
 $wgHCaptchaSecretKey = checkEnv( 'WG_HCAPTCHA_SECRET_KEY' );
 if ( getenv( "READ_ONLY" ) == 'true' ) {
-    $wgReadOnly = checkEnv( 'READ_ONLY_MESSAGE' )
+    $wgReadOnly = checkEnv( 'READ_ONLY_MESSAGE' );
 }
 
 
