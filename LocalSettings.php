@@ -195,14 +195,9 @@ wfLoadExtension( 'WikiEditor' );
 # Add more configuration options below.
 
 # todo: why do we have these settings for flow? what do they do?
+// structured discussions
 $wgNamespaceContentModels[NS_TALK] = 'flow-board';
 $wgNamespaceContentModels[NS_USER_TALK] = 'flow-board';
-
-$wgShowExceptionDetails = true;
-
-// restrict editing
-$wgGroupPermissions['user']['edit'] = false;
-$wgGroupPermissions['*']['createpage'] = false;
 
 // By default nobody can use this function, enable for bureaucrat?
 $wgGroupPermissions['bureaucrat']['usermerge'] = true;
@@ -216,22 +211,25 @@ if ($wgSitename == 'qw-staging') {
     $wgDebugLogFile = '/app/debug.log';
     $wgDebugDumpSql = true;
     $wgDebugToolbar = true;
+    $wgShowExceptionDetails = true;
 }
 
-
+// caching
 $wgCacheDirectory = "/tmp";
-$wgGroupPermissions['trustworthy'] = $wgGroupPermissions['autoconfirmed'];
-$wgEmailConfirmToEdit = true;
 $wgMainCacheType = CACHE_ACCEL;
-wfLoadExtension( 'StopForumSpam' );
-$wgSFSIPListLocation = 'listed_ip_30.txt';
+$wgSessionCacheType = CACHE_DB; // gotta have this so that people don't get logged out when app restarts
 
+// spam
+$wgEmailConfirmToEdit = true;
+$wgGroupPermissions['trustworthy'] = $wgGroupPermissions['autoconfirmed']; // helps with deleting spam users
+
+$wgSFSIPListLocation = 'listed_ip_30.txt';
+wfLoadExtension( 'StopForumSpam' );
 
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/hCaptcha' ]);
 $wgHCaptchaSiteKey = checkEnv( 'WG_HCAPTCHA_SITE_KEY' );
 $wgHCaptchaSecretKey = checkEnv( 'WG_HCAPTCHA_SECRET_KEY' );
 
-$wgSessionCacheType = CACHE_DB;
 
 function checkEnv($env) {
     $value = getenv($env);
@@ -240,3 +238,4 @@ function checkEnv($env) {
     }
     return $value;
 }
+
