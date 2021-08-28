@@ -261,3 +261,5 @@ $wgHCaptchaSecretKey = getenv( 'WG_HCAPTCHA_SECRET_KEY' );
 if ( empty( $wgHCaptchaSecretKey ) ) {
     throw new RuntimeException( 'WG_HCAPTCHA_SECRET_KEY env variable not set.' );
 }
+
+$wgSessionCacheType = CACHE_DB;
